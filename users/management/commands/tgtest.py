@@ -1,9 +1,8 @@
 from django.core.management import BaseCommand
 
-from users.services import MyBot
+from habits.services import send_message
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        my_bot = MyBot()
-        my_bot.send_message("Тестовый текст")
+        send_message("Тестовый текст", 303384091)

@@ -13,7 +13,7 @@ class Habit(models.Model):
                               **NULLABLE)
 
     place = models.CharField(max_length=150, verbose_name='Место', **NULLABLE)
-    time = models.TimeField(verbose_name="Время", **NULLABLE)
+    time = models.DateTimeField(verbose_name="Время когда необходимо выполнить привычку")
     action = models.CharField(max_length=100, verbose_name="Действие")
     nice_habit = models.BooleanField(default=False, verbose_name="Признак приятной привычки")
     linked_habit = models.ForeignKey("self", on_delete=models.SET_NULL, verbose_name="Связанная приывычка", **NULLABLE)
