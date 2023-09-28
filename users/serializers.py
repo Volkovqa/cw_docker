@@ -18,7 +18,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "telegram"]
+        fields = ["email", "password", "name", "telegram"]
 
     def create(self, validated_data):
         password = validated_data.pop('password')

@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     'users',
-    'habits',
-    'telegram_conn'
+    'habits'
 ]
 
 MIDDLEWARE = [
