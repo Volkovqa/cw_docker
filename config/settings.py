@@ -147,3 +147,6 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
+
+TG_TOKEN = os.getenv('TG_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
