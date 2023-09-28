@@ -13,8 +13,10 @@ class User(AbstractUser):
     username = None
 
     email = models.EmailField(unique=True, verbose_name='Email')
-    telegram = models.CharField(unique=True, verbose_name='telegram', **NULLABLE)
-    chat_id = models.PositiveIntegerField(default=0, verbose_name='Номер чата', **NULLABLE)
+    telegram = models.CharField(unique=True, verbose_name='telegram',
+                                **NULLABLE)
+    chat_id = models.PositiveIntegerField(default=0, verbose_name='Номер чата',
+                                          **NULLABLE)
     update_id = models.PositiveIntegerField(default=0, verbose_name='Номер последнего сообщения', **NULLABLE)
     name = models.CharField(max_length=50, verbose_name="Имя", **NULLABLE)
 

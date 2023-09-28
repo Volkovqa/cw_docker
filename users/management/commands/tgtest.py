@@ -5,4 +5,4 @@ from habits.services import send_message
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        send_message("Тестовый текст", 303384091)
+        send_message("Пора на тренировку!", 435244551)

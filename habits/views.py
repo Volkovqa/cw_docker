@@ -38,7 +38,7 @@ class PublicHabitListAPIView(generics.ListAPIView):
 
 
 class HabitRetrieveAPIView(generics.RetrieveAPIView):
-    """Контролер для просмотр одной привычке по id"""
+    """Контролер для просмотра одной привычки по id"""
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
