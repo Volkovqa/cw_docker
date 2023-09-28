@@ -1,52 +1,64 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from habits.models import Habit
 from habits.paginators import HabitPaginator
+from habits.permissions import IsOwner
 from habits.serializers import HabitSerializer
 
 
 class HabitCreateAPIView(generics.CreateAPIView):
-    """Контроллер для создания урока"""
+    """Контролер для создания урока"""
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         new_habit = serializer.save()
-        new_habit.user = self.request.user
+        new_habit.owner = self.request.user
         new_habit.save()
 
 
 class HabitListAPIView(generics.ListAPIView):
-    """Контроллер для просмотра привычек пользователя"""
+    """Контролер для просмотра привычек пользователя"""
     serializer_class = HabitSerializer
     pagination_class = HabitPaginator
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Habit.objects.filter(user=self.request.user)
+        return Habit.objects.filter(owner=self.request.user)
 
 
 class PublicHabitListAPIView(generics.ListAPIView):
-    """Контроллер для просмотра публичных привычек"""
+    """Контролер для просмотра публичных привычек"""
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Habit.objects.filter(public=True)
 
 
 class HabitRetrieveAPIView(generics.RetrieveAPIView):
-    """Контроллер для просмотра одной привычки по id"""
+    """Контролер для просмотр одной привычке по id"""
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Habit.objects.filter(user=self.request.user)
+        return Habit.objects.filter(owner=self.request.user)
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):
     """Изменение данных привычки"""
     serializer_class = HabitSerializer
-    queryset = Habit.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Habit.objects.filter(owner=self.request.user)
 
 
 class HabitDestroyAPIView(generics.DestroyAPIView):
     """Удаление привычки"""
     serializer_class = HabitSerializer
-    queryset = Habit.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Habit.objects.filter(owner=self.request.user)
