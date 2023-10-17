@@ -6,12 +6,6 @@ NULLABLE = {
     'blank': True
 }
 
-PERIOD = [
-    ('EVERY DAY', 'раз в день'),
-    ('EVERY OTHER DAY', 'через день'),
-    ('EVERY WEEK', 'раз в неделю'),
-]
-
 
 class Habit(models.Model):
     """Модель привычки"""
@@ -19,11 +13,11 @@ class Habit(models.Model):
                               **NULLABLE)
 
     place = models.CharField(max_length=150, verbose_name='Место', **NULLABLE)
-    time = models.TimeField(verbose_name="Время", **NULLABLE)
+    time = models.DateTimeField(verbose_name="Время когда необходимо выполнить привычку")
     action = models.CharField(max_length=100, verbose_name="Действие")
     nice_habit = models.BooleanField(default=False, verbose_name="Признак приятной привычки")
     linked_habit = models.ForeignKey("self", on_delete=models.SET_NULL, verbose_name="Связанная приывычка", **NULLABLE)
-    period = models.CharField(max_length=100, default='EVERY_DAY', choices=PERIOD, verbose_name="Периодичность")
+    period = models.SmallIntegerField(verbose_name="Периодичность")
     reward = models.CharField(max_length=150, verbose_name="Вознаграждение", **NULLABLE)
     length = models.SmallIntegerField(verbose_name="Продолжительность")
     public = models.BooleanField(default=False, verbose_name="Признак публичности")
