@@ -38,3 +38,6 @@ celery -A config beat -l info -S django
 * swagger, drf-yasg
 * Telegram
 * unittest
+
+## Запуск проекта в Docker:
+`docker-compose up -d --build`
